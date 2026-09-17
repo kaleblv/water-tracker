@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marea — control de agua</title>
+<meta name="description" content="Lleva el control de cuántos vasos de agua tomas al día.">
+<meta name="theme-color" content="#E7DCC2">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="water-layer">
+  <svg id="wave-svg" viewBox="0 0 200 20" preserveAspectRatio="none">
+    <path d="M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10 T 125 10 T 150 10 T 175 10 T 200 10 V20 H0 Z" fill="var(--water-300)"/>
+  </svg>
+  <div id="water-fill"></div>
+</div>
+
+<div class="app">
+  <header>
+    <div class="day-nav">
+      <button id="prev-day" aria-label="Día anterior">‹</button>
+      <div>
+        <div class="day-label" id="day-label">Hoy</div>
+        <span class="today-pill" id="today-pill"></span>
+      </div>
+      <button id="next-day" aria-label="Día siguiente">›</button>
+    </div>
+    <button id="gear-btn" aria-label="Configurar meta">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+  </header>
+
+  <main>
+    <div class="count-display">
+      <div class="count-fraction"><span id="count-current">0</span><span class="of">/</span><span id="count-target">12</span></div>
+      <div class="count-caption"><strong id="count-ml">0 ml</strong> de <span id="count-ml-target">4200 ml</span></div>
+    </div>
+
+    <button id="glass-btn" aria-label="Registrar un vaso de 350 ml">
+      <span class="ring"></span>
+      <span class="core">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 3H18L16.5 19C16.4 20.1 15.5 21 14.3 21H9.7C8.5 21 7.6 20.1 7.5 19L6 3Z" stroke="#FBF7EC" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M6.9 11.5C8 10.7 10 10.7 12 11.7C14 12.7 16 12.7 17.1 11.9" stroke="#FBF7EC" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </button>
+
+    <div>
+      <button id="undo-btn">Quitar un vaso</button>
+    </div>
+    <div class="celebrate" id="celebrate-msg"></div>
+  </main>
+
+  <footer>350 ml por vaso · toca para registrar</footer>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <h2>Meta diaria</h2>
+    <p class="help">¿Cuántos vasos de 350 ml quieres tomar al día?</p>
+    <div class="stepper">
+      <button id="dec-target" aria-label="Menos">−</button>
+      <div class="val"><span id="target-preview">12</span><span id="target-ml-preview">4200 ml</span></div>
+      <button id="inc-target" aria-label="Más">+</button>
+    </div>
+    <p class="ml-note">Equivale aproximadamente a 2 litros para la mayoría de las personas; ajústalo si tu meta es distinta.</p>
+    <button id="save-settings">Guardar</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
