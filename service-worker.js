@@ -1,7 +1,7 @@
 // Service worker: caches the app shell so it works offline and can be
 // installed to the home screen. Bump CACHE_NAME whenever you deploy changes
 // to force clients to pick up the new files.
-var CACHE_NAME = 'marea-agua-v1';
+var CACHE_NAME = 'marea-agua-v2';
 var APP_SHELL = [
   './',
   './index.html',

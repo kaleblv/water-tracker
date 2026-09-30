@@ -146,6 +146,12 @@ header {
   margin-top: 1px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 #gear-btn {
   width: 38px; height: 38px;
   border-radius: 50%;
@@ -156,6 +162,23 @@ header {
   color: var(--ink);
 }
 @media (prefers-color-scheme: dark) { #gear-btn { background: rgba(255,255,255,0.08); } }
+
+.install-btn {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 19px;
+  border: none;
+  background: var(--water-700);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms, transform 150ms;
+}
+.install-btn:hover { transform: scale(1.04); }
+.install-btn:active { background: var(--water-900); transform: scale(0.96); }
+.install-btn[hidden] { display: none; }
 
 main {
   flex: 1;

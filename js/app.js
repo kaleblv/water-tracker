@@ -145,4 +145,33 @@
       });
     });
   }
+
+  // Offer to install the app (Android/Chrome/Edge). The browser only fires
+  // this event when the manifest + service worker qualify the page as
+  // installable, so the button stays hidden until that happens.
+  var installBtn = document.getElementById('install-btn');
+  var deferredInstallPrompt = null;
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  if (installBtn && !isStandalone) {
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      installBtn.hidden = false;
+    });
+
+    installBtn.addEventListener('click', function () {
+      if (!deferredInstallPrompt) return;
+      installBtn.hidden = true;
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.finally(function () {
+        deferredInstallPrompt = null;
+      });
+    });
+
+    window.addEventListener('appinstalled', function () {
+      installBtn.hidden = true;
+      deferredInstallPrompt = null;
+    });
+  }
 })();
